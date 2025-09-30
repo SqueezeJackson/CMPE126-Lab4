@@ -6,7 +6,7 @@ template <typename T> class sortedlinkedlist{
 	private:
 	  struct Node{
 		 T data;
-		 struct Node* next = nullptr;
+		 struct Node* next = nullptr; //Struct for node with next init to nulltpr
 	  };
 	  Node* head;
 	  int size;
@@ -17,25 +17,25 @@ template <typename T> class sortedlinkedlist{
 	  }
 	  bool isEmpty(){
 		if(size == 0){
-			return true;
+			return true; //Linked lists arent really "empty" but wanted to return false if it had >0 elements
 		}
 		return false;
 	  }
 	  bool isFull(){
 		if(size == 0){
-			return false;
+			return false; //same as before, if not 0, is full
 		}
 		return true;
 	  }
 	  int listSize(){
-		return size;
+		return size; //returns size, same as func below
 	  }
 	  int maxListSize(){
 		return size;
 	  }
 	  void print(){
 		Node* temp = head;
-		while(temp!=nullptr){
+		while(temp!=nullptr){ //iterates through list, prints vals
 			cout<<temp->data<<endl;
 			temp = temp->next;
 		}
@@ -43,11 +43,11 @@ template <typename T> class sortedlinkedlist{
 	  }
 	  bool isItemAtEqual(int pos, T elem){
 		if(pos>size){
-			cout<<"Error, pos > size"<<endl;
+			cout<<"Error, pos > size"<<endl; //error checking
 			exit(1);
 		}
 		else{
-			Node* temp = head;
+			Node* temp = head;//creates temp node set to head and iterates until it reaches pos
 			int tSize = pos-1;
 			while(tSize>0){
 				temp = temp->next;
@@ -63,7 +63,7 @@ template <typename T> class sortedlinkedlist{
 			return false;
 		}
     }
-	  T retrieveAt(int pos){
+	  T retrieveAt(int pos){ //error checks val then traverses to that pt and returns the temp-> data val
 			if (pos>size||pos<=0){
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
