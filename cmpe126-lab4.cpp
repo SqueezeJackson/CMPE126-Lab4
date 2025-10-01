@@ -31,7 +31,7 @@ int main(){
      sl.insert(1);
      sl.print();
      cout<<endl;
-     sl.remove(2);
+     sl.remove(1);
      sl.remove(3);
      sl.print();
     return 0;
