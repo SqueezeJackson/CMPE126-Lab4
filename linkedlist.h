@@ -6,34 +6,34 @@ template <typename T> class linkedlist{
 	private:
 	  struct Node{
 		 T data;
-		 struct Node* next = nullptr;
+		 struct Node* next = nullptr; //Next node initialzed to nullptr
 	  };
 	  Node* head;
 	  int size;
 	public:
 	  linkedlist(){
 		size = 0;
-		head = nullptr;
+		head = nullptr; //head also init ot nullptr
 	  }
 	  bool isEmpty(){
 		if(size == 0){
-			return true;
-		}
+			return true; //These were kinda weird since linked list isnt really full or empty
+		}				// but I returned empty only if size  = 0
 		return false;
 	  }
 	  bool isFull(){
 		if(size == 0){
-			return false;
+			return false; //Same as before but opposite
 		}
 		return true;
 	  }
 	  int listSize(){
+		return size; //Returns size var
+	  }
+	  int maxListSize(){ //same as above
 		return size;
 	  }
-	  int maxListSize(){
-		return size;
-	  }
-	  void print(){
+	  void print(){ //Print func: iterates through list and prints the data
 		Node* temp = head;
 		while(temp!=nullptr){
 			cout<<temp->data<<endl;
@@ -41,8 +41,8 @@ template <typename T> class linkedlist{
 		}
 		return;
 	  }
-	  bool isItemAtEqual(int pos, T elem){
-		if(pos>size){
+	  bool isItemAtEqual(int pos, T elem){ //Iterates to a pos, assuming it is in bounds, and checks if the param
+		if(pos>size){						// is equal at that pt.
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
 		}
@@ -63,7 +63,7 @@ template <typename T> class linkedlist{
 			return false;
 		}
 	  }
-	  void insertAt(int pos, T elem){
+	  void insertAt(int pos, T elem){ //Checks if pos is within size, then iterates to pos and inserts element
 		if (pos>size){
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
@@ -87,8 +87,8 @@ template <typename T> class linkedlist{
 			return;
 		}
 	  }
-	  void insertEnd(T elem){
-		Node* newNode = new Node;
+	  void insertEnd(T elem){ //If head is null, insert that element as head
+		Node* newNode = new Node; //Else, iterate to the end insert it there
 		newNode -> data = elem;
 		newNode -> next = nullptr;
 		if(head == nullptr){
@@ -107,8 +107,8 @@ template <typename T> class linkedlist{
 			return;
 		}
 	  }
-	  void removeAt(int pos){
-		if (pos>size||pos<=0){
+	  void removeAt(int pos){ //If pos is within size, iterates to that pos then remoevs that
+		if (pos>size||pos<=0){ // node + frees its dynamic mem
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
 		}
@@ -132,7 +132,7 @@ template <typename T> class linkedlist{
 			delete temp;
 	  }
 	}
-	  T retrieveAt(int pos){
+	  T retrieveAt(int pos){ // Iterates through list and returns the data of the element at pos
 			if (pos>size||pos<=0){
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
@@ -147,7 +147,7 @@ template <typename T> class linkedlist{
 			return temp->data;
 	  }
 	}
-	  void clearList(){
+	  void clearList(){ //Travereses list and deletes all dynamic mem of nodes
 		Node* curr = head;
 		Node* nextN = nullptr;
 		while(curr!=nullptr){
@@ -158,7 +158,7 @@ template <typename T> class linkedlist{
 		size = 0;
 		head = nullptr;
 	  }
-	  void replaceAt(int pos, T elem){
+	  void replaceAt(int pos, T elem){ //Similar logic to retrieve at but replaces data instead of returning node->data
 			if (pos>size||pos<=0){
 				cout<<"Error, pos > size"<<endl;
 				exit(1);
@@ -174,7 +174,7 @@ template <typename T> class linkedlist{
 			}
 			return;
 	  }
-	  ~linkedlist(){
+	  ~linkedlist(){ //Destrutor; similar to clearList
 		Node* curr = head;
 		while(curr!=nullptr){
 			Node* nextNode = curr->next;
@@ -183,12 +183,12 @@ template <typename T> class linkedlist{
 		}
 		size = 0;
 	  }
-	linkedlist&  operator =(linkedlist& obj){
+	linkedlist&  operator =(linkedlist& obj){ //Checks self assignment then copies over elements to lhs
 		if(this == &obj){
 			return *this;
 		}
 		else{
-			clearList(); //lowk need to review this
+			clearList();
 			Node* temp = obj.head;
 			while(temp!=nullptr){
 				insertEnd(temp->data);
