@@ -6,7 +6,7 @@ template <typename T> class sortedlinkedlist{
 	private:
 	  struct Node{
 		 T data;
-		 struct Node* next = nullptr;
+		 struct Node* next = nullptr; //Init to null ptr here and in class def
 	  };
 	  Node* head;
 	  int size;
@@ -17,23 +17,23 @@ template <typename T> class sortedlinkedlist{
 	  }
 	  bool isEmpty(){
 		if(size == 0){
-			return true;
+			return true; //True if size == 0, false otherwise
 		}
 		return false;
 	  }
 	  bool isFull(){
 		if(size == 0){
-			return false;
+			return false; //True if size > 0
 		}
 		return true;
 	  }
-	  int listSize(){
+	  int listSize(){ //returns size of list for this function and the function below
 		return size;
 	  }
-	  int maxListSize(){
+	  int maxListSize(){ //Same as above
 		return size;
 	  }
-	  void print(){
+	  void print(){ //Traverses list and prints node-> data vals
 		Node* temp = head;
 		while(temp!=nullptr){
 			cout<<temp->data<<endl;
@@ -41,7 +41,7 @@ template <typename T> class sortedlinkedlist{
 		}
 		return;
 	  }
-	  bool isItemAtEqual(int pos, T elem){
+	  bool isItemAtEqual(int pos, T elem){ //Same as prev, iterates to a pos and checks if elem is == node-> data
 		if(pos>size){
 			cout<<"Error, pos > size"<<endl; 
 			exit(1);
@@ -63,7 +63,7 @@ template <typename T> class sortedlinkedlist{
 			return false;
 		}
     }
-	  T retrieveAt(int pos){ 
+	  T retrieveAt(int pos){ //Iterates to a pos and returns that val
 			if (pos>size||pos<=0){
 			cout<<"Error, pos > size"<<endl;
 			exit(1);
@@ -78,7 +78,7 @@ template <typename T> class sortedlinkedlist{
 			return temp->data;
 	  }
 	}
-    sortedlinkedlist&  operator =(sortedlinkedlist& obj){
+    sortedlinkedlist&  operator =(sortedlinkedlist& obj){ //Checks for self assignment then clears and copies all values over
 		if(this == &obj){
 			return *this;
 		}
@@ -92,7 +92,7 @@ template <typename T> class sortedlinkedlist{
 			return *this;
 		}
 	}
-    void clearList(){
+    void clearList(){ //traverses linked list and deletes all mem of vals, sets size ==0
 		Node* curr = head;
 		Node* nextN = nullptr;
 		while(curr!=nullptr){
@@ -103,12 +103,12 @@ template <typename T> class sortedlinkedlist{
 		size = 0;
 		head = nullptr;
 	  }
-      void insert(T elem){
-        if(head==nullptr){
-            Node* newNode = new Node;
-            newNode->data = elem;
-            newNode->next =nullptr;
-            head = newNode;
+      void insert(T elem){ 
+        if(head==nullptr){				//Special sported input function that handles 4 cases:
+            Node* newNode = new Node;   //Case 1 and 2: list is empty or val is smaller than head
+            newNode->data = elem;		//Case 3: val is somehwere within list elemets -> iterates through list
+            newNode->next =nullptr;		//until it is between two elements then inserts
+            head = newNode;				//Case 4: Val is bigger than any value in list, appends to the end of the list
             size++;
             return;
         }
@@ -142,7 +142,7 @@ template <typename T> class sortedlinkedlist{
             size++;
             return;
       }
-      void remove(T elem){
+      void remove(T elem){ //Iterates through a list to see if elem matches with data, deletes if is, does nothing if not
         Node* temp = head->next;
         Node* prev = head;
         if(head->data == elem){
